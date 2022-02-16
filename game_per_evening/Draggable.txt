@@ -1,0 +1,1 @@
+0 2 Idle 1 0 Drag 1 1 2 Click 1 Release 0 
