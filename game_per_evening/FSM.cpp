@@ -1,4 +1,6 @@
 ﻿#include "FSM.h"
+#include <fstream>
+#include <iostream>
 
 std::function<bool()> FSM::False = [] { return false; };
 
@@ -61,6 +63,26 @@ void FSM::OpenTransitionIf(std::string const& transition, std::function<bool()> 
 	}
 }
 
+void FSM::OpenTransitionIf(std::vector<std::string> const& transition_names, std::function<bool()> p)
+{
+	bool found = false;
+	for (int i = 0; i < transitions.size(); ++i)
+	{
+		for (auto transition : transition_names)
+		{
+			if (transitions[i] == transition)
+			{
+				OpenTransition(i, p);
+				found = false;
+			}
+		}
+		if (found)
+		{
+			break;
+		}
+	}
+}
+
 void FSM::OpenTransition(int transitionIndex, bool const open)
 {
 	check_transition[transitionIndex] = [open] { return open; };
@@ -88,6 +110,10 @@ bool FSM::TryTransit()
 
 void FSM::Transit(int transition)
 {
+	if (states[currentState] == "idle" && states[transition_to_state[transition]] == "drag_many")
+	{
+		std::cout << "test" << std::endl;
+	}
 	currentState = transition_to_state[transition];
 }
 

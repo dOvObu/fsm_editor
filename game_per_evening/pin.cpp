@@ -15,17 +15,17 @@ void pin::init(sf::RenderWindow& window)
 		prototype_fsm.AddTransition("create_node_selected", "true", "complete_connection");
 		prototype_fsm.AddTransition("create_connection", "release_on_other", "complete_connection");
 		prototype_fsm.AddTransition("complete_connection", "true", "idle");
-		auto* this_pin = this;
-		//fsm.WriteToFile("./pin.txt");
+		//prototype_fsm.WriteToFile("./pin.txt");
 
-		prototype_fsm.OpenTransitionIf("click", [&window, this_pin] { bool const res = this_pin->is_pointed(window); return res; });
 		prototype_fsm.OpenTransitionIf("deny", [] { bool const res = sf::Keyboard::isKeyPressed(sf::Keyboard::Escape); return res; });
-		prototype_fsm.OpenTransitionIf("release_on_nothing", [&window]()->bool { bool const res = get_first_pointed(window) == nullptr; return res; });
-		prototype_fsm.OpenTransitionIf("release_on_other", [&window]()->bool { auto const pointed = get_first_pointed(window); bool const res = pointed != nullptr; return res; });
+		prototype_fsm.OpenTransitionIf("release_on_nothing", [&window] { bool const res = get_first_pointed(window) == nullptr; return res; });
+		prototype_fsm.OpenTransitionIf("release_on_other", [&window] { auto const pointed = get_first_pointed(window); bool const res = pointed != nullptr; return res; });
 		prototype_fsm.OpenTransitionIf("true", [] { return true; });
 		fsm_initialized = true;
 	}
 	fsm = prototype_fsm;
+	auto* this_ = this;
+	fsm.OpenTransitionIf("click", [&window, this_] { bool const res = this_->is_pointed(window); return res; });
 }
 
 

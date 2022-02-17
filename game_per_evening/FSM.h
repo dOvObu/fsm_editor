@@ -1,6 +1,5 @@
 ﻿#ifndef FSM_H
 #define FSM_H
-#include <fstream>
 #include <functional>
 #include <string>
 #include <vector>
@@ -14,6 +13,7 @@ public:
 	int GetStateIndex() const;
 
 	void OpenTransitionIf(std::string const& transition, std::function<bool()> p);
+	void OpenTransitionIf(std::vector<std::string> const& transitions, std::function<bool()> p);
 	void OpenTransition(int transitionIndex, bool const open = true);
 	void OpenTransition(int transitionIndex, std::function<bool()> p);
 
