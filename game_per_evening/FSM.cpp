@@ -110,11 +110,7 @@ bool FSM::TryTransit()
 
 void FSM::Transit(int transition)
 {
-	if (states[currentState] == "idle" && states[transition_to_state[transition]] == "drag_many")
-	{
-		std::cout << "test" << std::endl;
-	}
-	currentState = transition_to_state[transition];
+	currentState = transition_to_state[currentState][transition];
 }
 
 void FSM::AddTransition(std::string const& start, std::string const& transition, std::string const& end,
@@ -128,19 +124,21 @@ void FSM::AddTransition(std::string const& start, std::string const& transition,
 		from = states.size();
 		states.push_back(start);
 		state_to_transition.emplace_back();
+		transition_to_state.emplace_back();
 	}
 	if (to == -1)
 	{
 		to = states.size();
 		states.push_back(end);
 		state_to_transition.emplace_back();
+		transition_to_state.emplace_back();
 	}
 	if (tr == -1)
 	{
 		tr = transitions.size();
 		transitions.push_back(transition);
 		check_transition.push_back(opened);
-		transition_to_state.push_back(to);
+		transition_to_state[from].push_back(to);
 	}
 	bool newTransition = true;
 	for (int t : state_to_transition[from])
@@ -155,7 +153,7 @@ void FSM::AddTransition(std::string const& start, std::string const& transition,
 	{
 		state_to_transition[from].push_back(tr);
 	}
-	transition_to_state[tr] = to;
+	transition_to_state[from][tr] = to;
 }
 
 void FSM::LoadFromFile(std::string const& filename)
@@ -189,8 +187,13 @@ void FSM::LoadFromFile(std::string const& filename)
 	{
 		file >> buff;
 		transitions.push_back(buff);
-		file >> n;
-		transition_to_state.push_back(n);
+		file >> sz_2;
+		transition_to_state.emplace_back();
+		for (int j = 0; j < sz_2; ++j)
+		{
+			file >> n;
+			transition_to_state.back().push_back(n);
+		}
 	}
 }
 
@@ -203,16 +206,20 @@ void FSM::WriteToFile(std::string const& filename) const
 	{
 		file << states[i] << " ";
 		file << state_to_transition[i].size() << " ";
-		for (int j = 0; j < state_to_transition[i].size(); ++j)
+		for (int j : state_to_transition[i])
 		{
-			file << state_to_transition[i][j] << " ";
+			file << j << " ";
 		}
 	}
 	file << transitions.size() << " ";
 	for (int i = 0; i < transitions.size(); ++i)
 	{
 		file << transitions[i] << " ";
-		file << transition_to_state[i] << " ";
+		file << transition_to_state[i].size() << " ";
+		for (int j : transition_to_state[i])
+		{
+			file << j << " ";
+		} 
 	}
 }
 

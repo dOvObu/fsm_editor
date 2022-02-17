@@ -12,7 +12,18 @@ public:
 	{
 		if (!fsm_initialized)
 		{
-			proto_fsm.LoadFromFile("node.fsm");
+			proto_fsm.AddTransition("idle", "click", "drag");
+			proto_fsm.AddTransition("idle", "in_selection_rectangle", "many_selected");
+			proto_fsm.AddTransition("drag", "release", "one_selected");
+			proto_fsm.AddTransition("one_selected", "deny", "idle");
+			proto_fsm.AddTransition("one_selected", "remove", "die");
+			proto_fsm.AddTransition("one_selected", "start_typing", "edit_name");
+			proto_fsm.AddTransition("edit_name", "deny", "one_selected");
+			proto_fsm.AddTransition("edit_name", "confirm", "idle");
+			proto_fsm.AddTransition("", "", "");
+			proto_fsm.AddTransition("", "", "");
+			proto_fsm.AddTransition("", "", "");
+			proto_fsm.AddTransition("", "", "");
 
 			proto_fsm.OpenTransitionIf("in_selection_rectangle", [] { return false; });
 			proto_fsm.OpenTransitionIf("deny", [] { return sf::Keyboard::isKeyPressed(sf::Keyboard::Escape); });
@@ -24,11 +35,22 @@ public:
 		fsm = proto_fsm;
 		auto this_ = this;
 		auto& offset = _offset;
-		fsm.OpenTransitionIf("release", [this_] {bool const res = !sf::Mouse::isButtonPressed(sf::Mouse::Left); this_->set_selected(!res); return res; });
-		fsm.OpenTransitionIf({"click", "click_many", "click_selected"}, [this_, &window, &offset] { bool const res = this_->is_pointed(window) && sf::Mouse::isButtonPressed(sf::Mouse::Left); if (res) { offset = this_->get_position() - window.mapPixelToCoords(sf::Mouse::getPosition(window)); this_->set_selected(res); } return res; });
-
-		_shape.setSize({ 100.f,100.f });
-		_shape.setPosition({ 100.f,100.f });
+		fsm.OpenTransitionIf("release", [this_]
+		{
+			bool const res = !sf::Mouse::isButtonPressed(sf::Mouse::Left);
+			this_->set_selected(!res);
+			return res;
+		});
+		fsm.OpenTransitionIf({"click", "click_many", "click_selected"}, [this_, &window, &offset]
+		{
+			bool const res = this_->is_pointed(window) && sf::Mouse::isButtonPressed(sf::Mouse::Left);
+			if (res)
+			{
+				offset = this_->get_position() - window.mapPixelToCoords(sf::Mouse::getPosition(window));
+				this_->set_selected(res);
+			}
+			return res;
+		});
 	}
 	void update(sf::RenderWindow& window)
 	{
@@ -66,7 +88,8 @@ public:
 		{
 			for (auto& nd : _all_nodes)
 			{
-				nd->set_selected(false);
+				nd->_selected = false;
+				nd->fsm.Transit(nd->fsm.GetTransitionIndex("release"));
 			}
 		}
 		_selected = selected;
@@ -76,7 +99,12 @@ public:
 	{
 		target.draw(_shape, states);
 	}
-	node() { _all_nodes.insert(this); }
+	node(sf::Vector2f size, sf::Vector2f position)
+	{
+		_all_nodes.insert(this);
+		_shape.setSize(size);
+		_shape.setPosition(position);
+	}
 	~node() override { _all_nodes.erase(this); }
 
 private:

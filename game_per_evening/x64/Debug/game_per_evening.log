@@ -1,4 +1,9 @@
-﻿  main.cpp
+﻿  FSM.cpp
+C:\Users\User\source\repos\game_per_evening\game_per_evening\FSM.cpp(124,23): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\User\source\repos\game_per_evening\game_per_evening\FSM.cpp(131,21): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\User\source\repos\game_per_evening\game_per_evening\FSM.cpp(138,26): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  main.cpp
   node.cpp
+  pin.cpp
   Создание кода...
   game_per_evening.vcxproj -> C:\Users\User\source\repos\game_per_evening\x64\Debug\game_per_evening.exe

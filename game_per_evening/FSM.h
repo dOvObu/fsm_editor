@@ -32,7 +32,7 @@ private:
 	int currentState = 0;
 	static std::function<bool()> False;
 	std::vector<std::vector<int>> state_to_transition;
-	std::vector<int> transition_to_state;
+	std::vector<std::vector<int>> transition_to_state;
 	std::vector<std::function<bool()>> check_transition;
 	std::vector<std::string> transitions;
 	std::vector<std::string> states;
