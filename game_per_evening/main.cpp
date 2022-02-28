@@ -2,7 +2,7 @@
 #include "node.h"
 #include <SFML/Graphics.hpp>
 
-
+#include "input.h"
 
 
 int main()
@@ -17,7 +17,14 @@ int main()
 	while (window.isOpen())
 	{
 		sf::Event e;
-		while (window.pollEvent(e)) if (e.type == sf::Event::Closed) window.close();
+		while (window.pollEvent(e))
+		{
+			Input::NotifySubsOn(e);
+			if (e.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+		}
 		nd.update(window);
 		nd2.update(window);
 		window.clear();

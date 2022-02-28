@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="FSM.cpp" />
+    <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="pin.cpp" />
@@ -149,6 +150,8 @@
   <ItemGroup>
     <ClInclude Include="connection.h" />
     <ClInclude Include="FSM.h" />
+    <ClInclude Include="input.h" />
+    <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="pin.h" />

@@ -1,6 +1,8 @@
 ﻿#ifndef FSM_H
 #define FSM_H
 #include <functional>
+#include <map>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -22,7 +24,8 @@ public:
 	void AddTransition(std::string const& start, std::string const& transition, std::string const& end, const std::function<bool()>& opened = False);
 
 	void LoadFromFile(std::string const& filename);
-	void WriteToFile(std::string const& filename) const;
+	void WriteToFile(std::string const& filename);
+	void GenerateCodeToFile(std::string const& filename) const;
 
 	int GetStateIndex(std::string const& state) const;
 	int GetTransitionIndex(std::string const& transition) const;
@@ -31,8 +34,8 @@ private:
 	static int GetIndex(std::vector<std::string> const& strs, std::string const& str);
 	int currentState = 0;
 	static std::function<bool()> False;
-	std::vector<std::vector<int>> state_to_transition;
-	std::vector<std::vector<int>> transition_to_state;
+	std::map<int, std::set<int>> state_to_transitions;
+	std::map<std::pair<int, int>, int> current_transition_to_state;
 	std::vector<std::function<bool()>> check_transition;
 	std::vector<std::string> transitions;
 	std::vector<std::string> states;

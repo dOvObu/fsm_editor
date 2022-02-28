@@ -39,6 +39,9 @@
     <ClCompile Include="workspace.cpp">
       <Filter>Исходные файлы\ui</Filter>
     </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Исходные файлы\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Label.h">
@@ -58,6 +61,12 @@
     </ClInclude>
     <ClInclude Include="workspace.h">
       <Filter>Исходные файлы\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Исходные файлы\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="IEventHandler.h">
+      <Filter>Исходные файлы\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
