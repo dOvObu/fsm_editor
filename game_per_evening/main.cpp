@@ -1,13 +1,11 @@
-﻿#include "Label.h"
-#include "node.h"
-#include <SFML/Graphics.hpp>
-
+﻿#include "node.h"
 #include "input.h"
 
 
 int main()
 {
 	sf::RenderWindow window{ sf::VideoMode{800, 600}, sf::String{} };
+	Input::Init(&window);
 	Label label(sf::String{ L"проверка" });
 	node nd({ 100.f,100.f }, { 100.f,100.f });
 	node nd2({ 100.f,100.f }, { 100.f,100.f });

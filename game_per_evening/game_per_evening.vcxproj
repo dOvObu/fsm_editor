@@ -142,6 +142,7 @@
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="pin.cpp" />

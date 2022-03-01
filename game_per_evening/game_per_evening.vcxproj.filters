@@ -42,6 +42,9 @@
     <ClCompile Include="input.cpp">
       <Filter>Исходные файлы\utils</Filter>
     </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Исходные файлы\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Label.h">

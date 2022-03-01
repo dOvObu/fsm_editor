@@ -8,7 +8,7 @@
 class Label : public sf::Drawable
 {
 public:
-	Label(sf::String const& s)
+	explicit Label(sf::String const& s)
 	{
 		if (!fontLoaded)
 		{
@@ -44,8 +44,6 @@ private:
 	static bool fontLoaded;
 };
 
-sf::Font Label::font;
-bool Label::fontLoaded = false;
 
 
 #endif
