@@ -1,0 +1,7 @@
+87 112 91 255   Background Color
+63 168 124 255  Node Background Color
+255 168 124 255 Button Color
+20 10           Button Default Text Offset
+255 122 56 255  Pin Color
+20 20           Pin Size
+168 69 67 255   Close Button Color

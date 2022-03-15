@@ -1,16 +1,15 @@
 ﻿#include "node.h"
 #include "input.h"
+#include "theme.h"
 
 
 int main()
 {
 	sf::RenderWindow window{ sf::VideoMode{800, 600}, sf::String{} };
 	Input::Init(&window);
-	Label label(sf::String{ L"проверка" });
-	node nd({ 100.f,100.f }, { 100.f,100.f });
-	node nd2({ 100.f,100.f }, { 100.f,100.f });
-	nd.init(window);
-	nd2.init(window);
+	theme::Load("theme.txt");
+
+	//Label label(sf::String{ L"проверка" });
 
 	while (window.isOpen())
 	{
@@ -22,13 +21,23 @@ int main()
 			{
 				window.close();
 			}
+			if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::F3)
+			{
+				auto nd = node::Create();
+				nd->SetSelected(true);
+				nd->Transit("release");
+			}
 		}
-		nd.update(window);
-		nd2.update(window);
-		window.clear();
-		window.draw(label);
-		window.draw(nd);
-		window.draw(nd2);
+
+		node::RemoveAllDead();
+		node::UpdateAll();
+		pin::UpdateAll();
+		connection::UpdateAll();
+		
+		window.clear(theme::BackgroundColor);
+		//window.draw(label);
+		node::DrawAll(window);
+		connection::DrawAll(window);
 		window.display();
 	}
 	return 0;

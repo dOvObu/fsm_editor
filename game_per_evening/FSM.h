@@ -20,7 +20,7 @@ public:
 	void OpenTransition(int transitionIndex, std::function<bool()> p);
 
 	bool TryTransit();
-	void Transit(int transition);
+	bool Transit(int transition);
 	void AddTransition(std::string const& start, std::string const& transition, std::string const& end, const std::function<bool()>& opened = False);
 
 	void LoadFromFile(std::string const& filename);
@@ -34,6 +34,7 @@ private:
 	static int GetIndex(std::vector<std::string> const& strs, std::string const& str);
 	int currentState = 0;
 	static std::function<bool()> False;
+	
 	std::map<int, std::set<int>> state_to_transitions;
 	std::map<std::pair<int, int>, int> current_transition_to_state;
 	std::vector<std::function<bool()>> check_transition;

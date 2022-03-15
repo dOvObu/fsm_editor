@@ -9,6 +9,7 @@ class Label : public sf::Drawable
 {
 public:
 	explicit Label(sf::String const& s)
+		: string(s)
 	{
 		if (!fontLoaded)
 		{
@@ -39,6 +40,7 @@ public:
 
 private:
 	sf::Text text;
+	std::wstring string;
 
 	static sf::Font font;
 	static bool fontLoaded;

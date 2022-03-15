@@ -45,6 +45,21 @@
     <ClCompile Include="Label.cpp">
       <Filter>Исходные файлы\ui</Filter>
     </ClCompile>
+    <ClCompile Include="theme.cpp">
+      <Filter>Исходные файлы\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="IColorizable.cpp">
+      <Filter>Исходные файлы\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Answer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Pool.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Label.h">
@@ -70,6 +85,27 @@
     </ClInclude>
     <ClInclude Include="IEventHandler.h">
       <Filter>Исходные файлы\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="theme.h">
+      <Filter>Исходные файлы\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="IColorizable.h">
+      <Filter>Исходные файлы\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="set_utility.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Исходные файлы\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Answer.h">
+      <Filter>Исходные файлы\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Pool.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="IConnectionOrigin.h">
+      <Filter>Исходные файлы\ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

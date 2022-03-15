@@ -139,23 +139,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Answer.cpp" />
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="FSM.cpp" />
+    <ClCompile Include="IColorizable.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="pin.cpp" />
+    <ClCompile Include="Pool.cpp" />
+    <ClCompile Include="theme.cpp" />
     <ClCompile Include="workspace.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Answer.h" />
+    <ClInclude Include="button.h" />
     <ClInclude Include="connection.h" />
     <ClInclude Include="FSM.h" />
+    <ClInclude Include="IColorizable.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="IEventHandler.h" />
+    <ClInclude Include="IConnectionOrigin.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="pin.h" />
+    <ClInclude Include="Pool.h" />
+    <ClInclude Include="set_utility.h" />
+    <ClInclude Include="theme.h" />
     <ClInclude Include="workspace.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
